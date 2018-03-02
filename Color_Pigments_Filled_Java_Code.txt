@@ -1,0 +1,125 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.*;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int GridX = 4;
+		int GridY = 5;
+
+		int inputLines[][] = { {255, 0, 0, 0, 0} , {0, 0, 0, 0, 0} , {0, 0, 255, 0, 0} , {0, 0, 0, 0, 0} };
+
+		FillGrid(GridX, GridY);
+		FillGrid2(inputLines);
+	}
+
+	static void FillGrid(int GridX, int GridY){
+		int[][] Grid = new int[GridX][GridY];
+		Grid[0][0] = 255;
+		Grid[2][2] = 255;
+
+
+		System.out.println("Display Original Array");
+
+		for(int i = 0; i < GridX; i++)
+		{
+			for(int j = 0; j < GridY; j++)
+			{
+				System.out.printf("%4d ", Grid[i][j]);
+			}
+			System.out.println();
+		}
+
+
+
+	}
+
+
+	static void FillGrid2(int Grid[][]){
+
+
+		ArrayList<ArrayList<Integer>> mdGrid = new ArrayList<ArrayList<Integer>>(Grid.length);
+		System.out.println("");
+		System.out.println("Displaying Filled Array");
+		for (int row = 0; row < Grid.length; row++) {
+			for (int col = 0; col < Grid[row].length; col++) {
+
+				System.out.printf("%4d ",Grid[row][col] );
+
+
+				if (Grid[row][col] != 0) {
+					//System.out.print("True");
+					int clrdepth = Grid[row][col];
+					//Left Check
+					if ((col != 0) &&  (Grid[row][col-1] == 0)){
+						Grid[row][col-1] = clrdepth-1;						
+					}				
+
+					//Right Check
+					if ((col != (Grid[row].length)-1) &&  (Grid[row][col+1] == 0)){
+						Grid[row][col+1] = clrdepth-1;						
+					}
+
+					//Top Check
+					if ((row != 0) &&  (Grid[row-1][col] == 0)){
+						Grid[row-1][col] = clrdepth-1;						
+					}
+
+					//Bottom Check
+					if ((row != (Grid.length)-1) &&  (Grid[row+1][col] == 0)){
+						Grid[row+1][col] = clrdepth-1;						
+					}
+
+				}
+			}
+			System.out.println();
+
+		}
+
+
+	}
+
+}
+
+
+//More Dynamic Approch can be implemented as below
+class TwoDimArrayL<T> extends ArrayList<ArrayList<T>> {
+	public void addToInnArray(int index, T element) {
+		while (index >= this.size()) {
+			this.add(new ArrayList<T>());
+		}
+		this.get(index).add(element);
+	}
+
+	public void addToInnArray(int index, int index2, T element) {
+		while (index >= this.size()) {
+			this.add(new ArrayList<T>());
+		}
+
+		ArrayList<T> inner = this.get(index);
+		while (index2 >= inner.size()) {
+			inner.add(null);
+		}
+
+		inner.set(index2, element);
+	}
+}
+
+==========================================================
+
+//ResultSet as Follows of Original array and filled array
+ Display Original Array
+ 255    0    0    0    0 
+   0    0    0    0    0 
+   0    0  255    0    0 
+   0    0    0    0    0 
+
+Displaying Filled Array
+ 255  254  253  252  251 
+ 254  253  252  251  250 
+ 253  252  255  250  249 
+ 252  251  254  249  248 
