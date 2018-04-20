@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -95,16 +95,16 @@ namespace Polymorphism_AreaCalculation
 
     class Rectangle : Shape
     {
-        private int length;
-        private int width;
+        //private int length;
+        //private int width;
         private double v1;
         private double v2;
 
         public Rectangle() { }//empty constructor
         public Rectangle(int length, int width)//overloading, we will pass in a length & width
         {
-            this.length = length;
-            this.width = width;
+            this.v1 = length;
+            this.v2 = width;
         }
 
         public Rectangle(double v1, double v2)
@@ -121,3 +121,18 @@ namespace Polymorphism_AreaCalculation
 
     }
 }
+/* 
+ * InPut
+ * 5
+3 4
+2
+3.3
+5 7.5
+
+ * Output
+79
+12
+13
+11
+38
+*/
